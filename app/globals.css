@@ -25,6 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+#toolbar {
+  color: #fff;
+ background-color: #bababa; 
+ 
+}
 
 @layer utilities {
   .text-balance {
