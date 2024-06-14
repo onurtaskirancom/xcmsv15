@@ -1,4 +1,3 @@
-// app/admin/pages/dashboard/page.jsx
 import AdminPage from '../page';
 
 const DashboardPage = () => (

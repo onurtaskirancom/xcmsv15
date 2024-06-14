@@ -52,7 +52,7 @@ const SignIn = () => {
       console.log('err => ', err);
       setLoading(false);
       toast.error('Signin failed. Try again.');
-      console.log("başarısız");
+      console.log('failed');
     }
   };
 
@@ -102,7 +102,7 @@ const SignIn = () => {
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none"
             disabled={loading}
           >
-            {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+            {loading ? 'Logging In...' : 'Sign In'}
           </button>
         </form>
       </div>

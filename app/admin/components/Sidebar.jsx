@@ -11,7 +11,10 @@ const Sidebar = () => (
           <Link href="/admin/dashboard">Dashboard</Link>
         </li>
         <li className="px-4 py-2 hover:bg-gray-700">
-          <Link href="/admin/posts">Create New Post</Link>
+          <Link href="/admin/posts">All Posts</Link>
+        </li>
+        <li className="px-4 py-2 hover:bg-gray-700">
+          <Link href="/admin/posts/new">Create New Post</Link>
         </li>
       </ul>
     </nav>

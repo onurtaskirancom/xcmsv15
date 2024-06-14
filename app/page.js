@@ -5,8 +5,6 @@ import axios from 'axios';
 import Image from 'next/image';
 
 const url3 = 'http://localhost:8000/api/posts-for-all/';
-const url2 = 'https://course-api.com/react-store-products';
-const url = 'https://jsonplaceholder.typicode.com/posts';
 
 export default function Home() {
   // State to hold the posts
@@ -45,35 +43,3 @@ export default function Home() {
   );
 }
 
-// export default function Home() {
-
-//   const [item, setItem] = useState([]);
-
-//   const blog = async () => {
-//    try {
-//      const post = await axios.get(url3);
-//      setItem(post.data)
-//      console.log(post.data);
-//    } catch (error) {
-//     console.log(error.post.data);
-//    }
-//   }
-
-//   useEffect(()=>{
-//     blog();
-//   },[]);
-
-//     return (
-//       <div>
-//         <p>sdsds</p>
-//         <h1>Posts</h1>
-//         {item.map((p, _id) => (
-//           <div key={_id}>
-//             <h1>{p.title}</h1>
-//             <Image src={p.featuredImage.url} alt="" width={250} height={120}/>
-            
-//           </div>
-//         ))}
-//       </div>
-//     );
-// }
