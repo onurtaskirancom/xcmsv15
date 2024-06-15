@@ -12,7 +12,7 @@ const Edit = () => {
   }, []);
 
   if (!slug) {
-    return <div>Yükleniyor...</div>;
+    return <div>Loading...</div>;
   }
 
   return (

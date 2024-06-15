@@ -1,7 +1,7 @@
 'use client';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../context/auth';
@@ -16,6 +16,12 @@ const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+    useEffect(() => {
+      if (auth?.token) {
+        router.push('/');
+      }
+    }, [auth]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

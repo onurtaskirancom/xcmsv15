@@ -20,7 +20,7 @@ function EditPost({ slug, page = 'admin' }) {
   const [tags, setTags] = useState([]);
   const [loadedCategories, setLoadedCategories] = useState([]);
   const [loadedTags, setLoadedTags] = useState([]);
-  const [featuredImage, setFeaturedImage] = useState({});
+  const [featuredImage, setFeaturedImage] = useState(null);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [editHtml, setEditHtml] = useState(false);
@@ -36,9 +36,6 @@ function EditPost({ slug, page = 'admin' }) {
 
   useEffect(() => {
     loadCategories();
-  }, []);
-
-  useEffect(() => {
     loadTags();
   }, []);
 
@@ -150,7 +147,7 @@ function EditPost({ slug, page = 'admin' }) {
             onChange={handleBody}
             modules={EditPost.modules}
             formats={EditPost.formats}
-            className="h-64 mb-4"
+            className="h-64 mb-4 "
           />
         )}
         <div className="mb-4 flex justify-between pt-6">
@@ -265,35 +262,50 @@ function EditPost({ slug, page = 'admin' }) {
           <div className="mt-4">
             <img
               src={media?.selected?.url}
-              alt="selected featured image"
-              //style={{ height: '100px' }}
+              alt="Selected featured image"
               className="w-full h-auto rounded"
             />
           </div>
         )}
-        {featuredImage?.url && (
+        {featuredImage?.url && !media?.selected && (
           <div className="mt-4">
             <img
-              src={featuredImage?.url}
-              alt="featured image"
-              //style={{ height: '100px' }}
+              src={featuredImage.url}
+              alt="Featured image"
               className="w-full h-auto rounded"
             />
           </div>
         )}
+        <div className="pt-4">
+          <button
+            disabled={loading}
+            onClick={handlePublish}
+            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700"
+          >
+            {loading ? 'Publishing...' : 'Update'}
+          </button>
+        </div>
       </div>
-      <div className="flex-1">
-        <Media />
-      </div>
-      <div className="pt-4 flex justify-between">
-        <button
-          disabled={loading}
-          onClick={handlePublish}
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+      {media.showMediaModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          onClick={() => setMedia({ ...media, showMediaModal: false })}
         >
-          {loading ? 'Publishing...' : 'Update'}
-        </button>
-      </div>
+          <div
+            className="bg-gray-700 rounded-lg p-8 w-full max-h-full lg:w-3/4 overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold mb-4">Media</h2>
+            <Media />
+            <button
+              className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-400 mt-4"
+              onClick={() => setMedia({ ...media, showMediaModal: false })}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

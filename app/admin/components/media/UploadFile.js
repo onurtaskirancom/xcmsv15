@@ -40,7 +40,7 @@ const UploadFile = ({ redirectToLibrary = false, page = 'admin' }) => {
       });
 
       if (redirectToLibrary) {
-        router.push(`/${page}/media/library`);
+        router.push(`/${page}/media`);
       }
       setUploading(false);
     } catch (error) {
@@ -51,16 +51,27 @@ const UploadFile = ({ redirectToLibrary = false, page = 'admin' }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <input
-        type="file"
-        onChange={handleFileChange}
-        className="mb-4"
-        disabled={uploading}
-      />
+      <label className="flex flex-col items-center px-4 py-6 bg-dark rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-500 hover:text-white text-blue-500 transition-all duration-200">
+        <svg
+          className="w-8 h-8"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path d="M16.88 9.17a.75.75 0 01.62.83l-.5 3.75a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 13.75l-.5-3.75a.75.75 0 01.62-.83 5.5 5.5 0 1113.76 0zM5.75 11.25v2.25h8.5v-2.25a3.75 3.75 0 10-8.5 0z" />
+        </svg>
+        <span className="mt-2 text-base leading-normal">Select a file</span>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="hidden"
+          disabled={uploading}
+        />
+      </label>
       <button
-        className={`px-4 py-2 bg-blue-500 text-white rounded ${
-          uploading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
+        className={`mt-4 px-4 py-2 bg-blue-500 text-white rounded ${
+          uploading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'
+        } transition-all duration-200`}
         disabled={uploading}
       >
         {uploading ? 'Uploading...' : 'Click to Upload'}
@@ -68,5 +79,6 @@ const UploadFile = ({ redirectToLibrary = false, page = 'admin' }) => {
     </div>
   );
 };
+
 
 export default UploadFile;

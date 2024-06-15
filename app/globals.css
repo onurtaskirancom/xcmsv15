@@ -36,3 +36,8 @@ body {
     text-wrap: balance;
   }
 }
+
+.ql-toolbar.ql-snow {
+  @apply bg-blue-300;
+}
+

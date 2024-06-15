@@ -27,7 +27,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <>
       <p>sdsds</p>
       <h1>Posts</h1>
       <ul>
@@ -39,7 +39,7 @@ export default function Home() {
             
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 

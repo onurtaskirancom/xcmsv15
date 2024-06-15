@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 function AllPostsComponent() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   const router = useRouter();
 
@@ -47,9 +48,24 @@ function AllPostsComponent() {
     }
   };
 
+  const filteredPosts = posts.filter(
+    (post) =>
+      (post.title &&
+        post.title.toLowerCase().includes(keyword.toLowerCase())) ||
+      (post.content &&
+        post.content.toLowerCase().includes(keyword.toLowerCase()))
+  );
+
   return (
     <div className="flex flex-col pt-5 px-4 lg:px-16">
       <h1 className="text-2xl font-bold mb-4">All Posts</h1>
+      <input
+        type="text"
+        className="border p-2 mb-4 w-full lg:w-full bg-gray-800 text-white"
+        placeholder="Search..."
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -61,7 +77,7 @@ function AllPostsComponent() {
             </tr>
           </thead>
           <tbody>
-            {posts.map((post) => (
+            {filteredPosts.map((post) => (
               <tr key={post._id}>
                 <td className="py-2 px-4 border-b border-gray-700">
                   {post.title}
