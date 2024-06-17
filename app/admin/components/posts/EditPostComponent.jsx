@@ -3,11 +3,11 @@ import { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { MediaContext } from '../../context/media';
+import { MediaContext } from '../../../context/media';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select';
-import Media from '../components/media/index';
+import Media from '../../components/media/index';
 
 function EditPost({ slug, page = 'admin' }) {
   // context

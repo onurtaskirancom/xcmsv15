@@ -2,7 +2,12 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from './context/auth';
+import { PostProvider } from './context/post';
+import { MediaProvider } from './context/media';
+import { ThemeProvider } from './context/theme';
 import { Toaster } from 'react-hot-toast';
+import TopNav from '../app/components/TopNav';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,7 +30,16 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <Toaster />
-        <AuthProvider>{children}</AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <PostProvider>
+              <MediaProvider>
+                <TopNav />
+                {children}
+              </MediaProvider>
+            </PostProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

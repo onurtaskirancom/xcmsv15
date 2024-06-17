@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
-import EditPostComponent from '../../components/posts/EditPostComponent';
+import AuthorLayout from '../../../admin/AuthorLayout';
+import EditPostComponent from '../../../admin/components/posts/EditPostComponent';
 
-const Edit = () => {
+const EditPost = () => {
   const [slug, setSlug] = useState(null);
 
   useEffect(() => {
@@ -16,10 +17,10 @@ const Edit = () => {
   }
 
   return (
-    <>
-      <EditPostComponent slug={slug} />
-    </>
+    <AuthorLayout>
+      <EditPostComponent slug={slug} page="author" />
+    </AuthorLayout>
   );
 };
 
-export default Edit;
+export default EditPost;

@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth';
 import { MediaContext } from '../../../context/media';
@@ -40,7 +41,7 @@ const UploadFile = ({ redirectToLibrary = false, page = 'admin' }) => {
       });
 
       if (redirectToLibrary) {
-        router.push(`/${page}/media`);
+        router.push(`/${page}/media/library`);
       }
       setUploading(false);
     } catch (error) {

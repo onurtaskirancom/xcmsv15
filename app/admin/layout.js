@@ -30,7 +30,7 @@ import { MediaProvider } from '../context/media';
 import { PostProvider } from '../context/post';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import LoadingToRedirect from '../../components/LoadingToRedirect';
+import LoadingToRedirect from '../components/LoadingToRedirect';
 import axios from 'axios';
 
 const AdminLayout = ({ children, title }) => {
@@ -60,9 +60,9 @@ const AdminLayout = ({ children, title }) => {
   }
 
   return (
-    <AuthProvider>
-      <MediaProvider>
-        <PostProvider>
+    // <AuthProvider>
+    //   <PostProvider>
+    //     <MediaProvider>
           <div className="flex min-h-screen">
             <Sidebar />
             <div className="flex-1 ml-6 p-6">
@@ -70,12 +70,10 @@ const AdminLayout = ({ children, title }) => {
               {children}
             </div>
           </div>
-        </PostProvider>
-      </MediaProvider>
-    </AuthProvider>
+    //     </MediaProvider>
+    //   </PostProvider>
+    // </AuthProvider>
   );
 };
 
 export default AdminLayout;
-
-
