@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { ThreeDots } from 'react-loader-spinner';
 
 function AllPostsComponent() {
   const [posts, setPosts] = useState([]);
@@ -67,7 +68,9 @@ function AllPostsComponent() {
         onChange={(e) => setKeyword(e.target.value)}
       />
       {loading ? (
-        <p>Loading...</p>
+        <div className="flex justify-center py-8">
+          <ThreeDots color="#00BFFF" height={80} width={80} />
+        </div>
       ) : (
         <table className="min-w-full bg-gray-800 text-white">
           <thead>

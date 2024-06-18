@@ -110,10 +110,10 @@ const TopNav = () => {
                     {auth?.user?.name || 'Dashboard'}
                   </button>
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                    <div className="absolute right-0 mt-2 w-48 bg-gray-600  rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                       <Link
                         href={roleBasedLink()}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-500 text-white rounded-md "
                       >
                         Dashboard
                       </Link>

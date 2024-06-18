@@ -1,35 +1,44 @@
-'use client'
+'use client';
 import React, { useContext, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { AuthContext } from '../../../context/auth';
 import { MediaContext } from '../../../context/media';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { HiOutlineXCircle, HiInboxIn } from 'react-icons/hi';
+import { ThreeDots } from 'react-loader-spinner';
 
 const MediaLibrary = ({ page = 'admin' }) => {
-  // context
-  const [auth, setAuth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
   const [media, setMedia] = useContext(MediaContext);
-  const [showPreview, setShowMedia] = useState(false);
+  const [localImages, setLocalImages] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     const fetchMedia = async () => {
       try {
         const { data } = await axios.get('/media');
+        console.log('Fetched media:', data);
         setMedia((prev) => ({ ...prev, images: data }));
+        setLocalImages(data);
       } catch (err) {
-        console.log(err);
+        console.log('Error fetching media:', err);
       }
     };
     fetchMedia();
-  }, []);
+  }, [setMedia]);
 
-  const handleImageUpload = async (event) => {
-    const files = event.target.files;
+  useEffect(() => {
+    setLocalImages(media.images);
+  }, [media.images]);
+
+  const onDrop = async (acceptedFiles) => {
     const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append('file', files[i]);
-    }
+    acceptedFiles.forEach((file) => {
+      formData.append('file', file);
+    });
+
+    setUploading(true);
 
     try {
       const { data } = await axios.post(
@@ -42,15 +51,25 @@ const MediaLibrary = ({ page = 'admin' }) => {
           },
         }
       );
-      setMedia({
-        images: [...media.images, ...data],
-        selected: data[0],
+
+      console.log('API Response:', data);
+
+      const newImages = Array.isArray(data) ? data : [data];
+      console.log('New Images:', newImages);
+
+      setMedia((prevMedia) => ({
+        ...prevMedia,
+        images: [...prevMedia.images, ...newImages],
+        selected: newImages[0],
         showMediaModal: false,
-      });
-      toast.success('File uploaded successfully');
+      }));
+      setLocalImages((prevImages) => [...prevImages, ...newImages]);
+      toast.success('Files uploaded successfully');
     } catch (err) {
-      console.log(err);
+      console.log('Error uploading files:', err);
       toast.error('File upload failed');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -58,42 +77,54 @@ const MediaLibrary = ({ page = 'admin' }) => {
     try {
       const { data } = await axios.delete(`/media/${imageId}`);
       if (data.ok) {
-        setMedia({
-          ...media,
-          images: media.images.filter((image) => image._id !== imageId),
+        setMedia((prevMedia) => ({
+          ...prevMedia,
+          images: prevMedia.images.filter((image) => image._id !== imageId),
           selected: null,
-        });
-        toast.error('Image deleted successfully');
+        }));
+        setLocalImages((prevImages) =>
+          prevImages.filter((image) => image._id !== imageId)
+        );
+        toast.success('Image deleted successfully');
       }
     } catch (err) {
-      console.log(err);
+      console.log('Error deleting image:', err);
+      toast.error('Failed to delete image');
     }
   };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: 'image/*',
+    multiple: true, // Çoklu dosya yüklemeyi etkinleştirin
+  });
 
   return (
     <>
       <div className="flex justify-center py-8">
-        <label
-          htmlFor="upload"
+        <div
+          {...getRootProps()}
           className="flex flex-col items-center justify-center w-64 h-64 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400"
         >
-          <HiInboxIn className="w-16 h-16 text-gray-400" />
-          <span className="mt-2 text-sm text-gray-500">
-            Click or drag file to this area to upload
-          </span>
-          <input
-            id="upload"
-            type="file"
-            multiple
-            className="hidden"
-            onChange={handleImageUpload}
-          />
-        </label>
+          {uploading ? (
+            <div className="flex items-center justify-center">
+              <ThreeDots color="#00BFFF" height={80} width={80} />
+            </div>
+          ) : (
+            <>
+              <HiInboxIn className="w-16 h-16 text-gray-400" />
+              <span className="mt-2 text-sm text-gray-500">
+                Click or drag file to this area to upload
+              </span>
+              <input {...getInputProps()} className="hidden" />
+            </>
+          )}
+        </div>
       </div>
 
       <div className="text-center pt-8">
         <div className="max-h-[60vh] overflow-y-auto flex flex-wrap justify-center">
-          {media?.images?.map((image) => (
+          {localImages.map((image) => (
             <div key={image._id} className="relative m-2">
               <img
                 src={image.url}

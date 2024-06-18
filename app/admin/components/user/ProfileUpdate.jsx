@@ -115,7 +115,7 @@ const ProfileUpdate = ({ page = 'admin' }) => {
           name="name"
           className="mb-4 w-full p-2 border bg-gray-800 text-white border-gray-300 rounded"
           placeholder="Full name"
-          value={userDetails.name}
+          value={userDetails.name || ''}
           onChange={handleInputChange}
         />
         <input
@@ -123,7 +123,7 @@ const ProfileUpdate = ({ page = 'admin' }) => {
           name="email"
           className="mb-4 w-full p-2 border bg-gray-800 text-white border-gray-300 rounded"
           placeholder="Email"
-          value={userDetails.email}
+          value={userDetails.email || ''}
           onChange={handleInputChange}
         />
         <input
@@ -131,7 +131,7 @@ const ProfileUpdate = ({ page = 'admin' }) => {
           name="website"
           className="mb-4 w-full p-2 border bg-gray-800 text-white border-gray-300 rounded"
           placeholder="Website"
-          value={userDetails.website}
+          value={userDetails.website || ''}
           onChange={handleInputChange}
         />
         <input
@@ -139,7 +139,7 @@ const ProfileUpdate = ({ page = 'admin' }) => {
           name="password"
           className="mb-4 w-full p-2 border bg-gray-800 text-white border-gray-300 rounded"
           placeholder="Password"
-          value={userDetails.password}
+          value={userDetails.password || ''}
           onChange={handleInputChange}
         />
 

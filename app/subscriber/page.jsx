@@ -1,4 +1,4 @@
-import SubscriberLayout from '../SubscriberLayout';
+import SubscriberLayout from '../admin/SubscriberLayout';
 
 const Subscriber = () => {
   return (

@@ -1,33 +1,7 @@
-// import Header from './components/Header';
-// import Sidebar from './components/Sidebar';
-// import { MediaProvider } from '../context/media';
-// import { PostProvider } from '../context/post';
-// import { AuthProvider } from '../context/auth';
-
-// const AdminLayout = ({ children, title }) => (
-//   <AuthProvider>
-//     <MediaProvider>
-//       <PostProvider>
-//         <div className="flex">
-//           <Sidebar />
-//           <div className="flex-1 ml-6 p-6">
-//             <Header title={title} />
-//             {children}
-//           </div>
-//         </div>
-//       </PostProvider>
-//     </MediaProvider>
-//   </AuthProvider>
-// );
-
-// export default AdminLayout;
-
 'use client';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthProvider, AuthContext } from '../context/auth';
-import { MediaProvider } from '../context/media';
-import { PostProvider } from '../context/post';
+import { AuthContext } from '../context/auth';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import LoadingToRedirect from '../components/LoadingToRedirect';
@@ -60,9 +34,6 @@ const AdminLayout = ({ children, title }) => {
   }
 
   return (
-    // <AuthProvider>
-    //   <PostProvider>
-    //     <MediaProvider>
           <div className="flex min-h-screen">
             <Sidebar />
             <div className="flex-1 ml-6 p-6">
@@ -70,9 +41,6 @@ const AdminLayout = ({ children, title }) => {
               {children}
             </div>
           </div>
-    //     </MediaProvider>
-    //   </PostProvider>
-    // </AuthProvider>
   );
 };
 

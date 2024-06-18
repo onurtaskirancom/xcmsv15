@@ -151,9 +151,9 @@ const AuthorNav = () => {
               >
                 <li
                   className={`px-4 py-2 hover:bg-gray-700 flex items-center cursor-pointer ${activeName(
-                    '/author/media/library'
+                    '/author/media'
                   )}`}
-                  onClick={() => handleNavigation('/author/media/library')}
+                  onClick={() => handleNavigation('/author/media')}
                 >
                   <HiOutlineLibrary className="mr-2" />
                   {isSidebarOpen && 'Library'}

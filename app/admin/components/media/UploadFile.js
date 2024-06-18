@@ -41,7 +41,7 @@ const UploadFile = ({ redirectToLibrary = false, page = 'admin' }) => {
       });
 
       if (redirectToLibrary) {
-        router.push(`/${page}/media/library`);
+        router.push(`/${page}/media`);
       }
       setUploading(false);
     } catch (error) {

@@ -24,7 +24,7 @@ const TagUpdateModal = ({ visible, setVisible, handleUpdate, updatingTag }) => {
               type="text"
               className="border p-2 w-full bg-gray-800 text-white border-gray-300"
               placeholder="Give it a name"
-              value={form.name}
+              value={form.name || ''}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
           </div>

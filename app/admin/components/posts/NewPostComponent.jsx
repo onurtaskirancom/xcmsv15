@@ -123,7 +123,7 @@ function NewPostComponent({ page = 'admin' }) {
         <input
           type="text"
           className="w-full p-2 border bg-gray-800 text-white border-gray-300 rounded mb-4"
-          value={title}
+          value={title || ''}
           placeholder="Give your post a title"
           onChange={(e) => {
             setTitle(e.target.value);

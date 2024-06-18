@@ -1,5 +1,5 @@
-import AuthorLayout from '../../../admin/AuthorLayout';
-import MediaLibrary from '../../../admin/components/media/MediaLibrary';
+import AuthorLayout from '../../admin/AuthorLayout';
+import MediaLibrary from '../../admin/components/media/MediaLibrary';
 
 function AuthorMediaLibrary() {
   return (
