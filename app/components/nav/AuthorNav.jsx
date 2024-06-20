@@ -50,7 +50,7 @@ const AuthorNav = () => {
 
   const handleNavigation = (url) => {
     router.push(url);
-    setCurrent(url); // Mevcut yolu güncellemek için
+    setCurrent(url); 
   };
 
   return (
