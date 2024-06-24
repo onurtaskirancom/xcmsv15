@@ -83,14 +83,14 @@ export default function PostDetail() {
   return (
     <div
       className={`min-h-screen py-10 ${
-        theme === 'dark' ? 'bg-gray-900 text-gray-300' : 'bg-white text-black'
+        theme === 'dark' ? 'bg-gray-950 text-gray-300' : 'bg-white text-black'
       }`}
     >
       <div className="container mx-auto px-4">
         <div
           className={`max-w-4xl mx-auto rounded-lg shadow-lg overflow-hidden ${
             theme === 'dark'
-              ? 'bg-gray-800 text-gray-300'
+              ? 'bg-gray-900 text-gray-300'
               : 'bg-white text-black'
           }`}
         >
@@ -146,7 +146,7 @@ export default function PostDetail() {
         <div
           className={`mt-8 max-w-4xl mx-auto rounded-lg shadow-lg overflow-hidden px-8 py-6 ${
             theme === 'dark'
-              ? 'bg-gray-800 text-gray-300'
+              ? 'bg-gray-900 text-gray-300'
               : 'bg-white text-black'
           }`}
         >
@@ -156,7 +156,7 @@ export default function PostDetail() {
               <div
                 key={comment._id}
                 className={`mb-6 border-b pb-4 ${
-                  theme === 'dark' ? 'border-gray-700' : 'border-gray-300'
+                  theme === 'dark' ? 'border-gray-900' : 'border-gray-300'
                 }`}
               >
                 <div className="flex items-center mb-2">
@@ -170,7 +170,7 @@ export default function PostDetail() {
                 <div
                   className={`prose prose-sm max-w-none ${
                     theme === 'dark'
-                      ? 'prose-pre:bg-gray-700 prose-code:bg-gray-700 prose-pre:text-gray-300 prose-code:text-gray-300'
+                      ? 'prose-pre:bg-gray-900 prose-code:bg-gray-700 prose-pre:text-gray-300 prose-code:text-gray-300'
                       : 'prose-pre:bg-gray-100 prose-code:bg-gray-100 prose-pre:text-gray-900 prose-code:text-gray-900'
                   }`}
                 >
@@ -187,7 +187,7 @@ export default function PostDetail() {
         <div
           className={`mt-8 max-w-4xl mx-auto rounded-lg shadow-lg overflow-hidden px-8 py-6 ${
             theme === 'dark'
-              ? 'bg-gray-800 text-gray-300'
+              ? 'bg-gray-900 text-gray-300'
               : 'bg-gray-100 text-black'
           }`}
         >
@@ -201,7 +201,7 @@ export default function PostDetail() {
               <textarea
                 className={`w-full h-32 p-4 mb-4 rounded-md ${
                   theme === 'dark'
-                    ? 'bg-gray-800 text-white'
+                    ? 'bg-gray-950 text-white'
                     : 'bg-white text-black'
                 }`}
                 placeholder="Write your comment here..."

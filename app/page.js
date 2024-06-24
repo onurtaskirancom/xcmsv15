@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
 import ThemeContext from './context/theme';
 import Sidebar from './components/Sidebar';
 
-export default function Home() {
+const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [recentPosts, setRecentPosts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,11 +19,7 @@ export default function Home() {
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
-    getTotal();
-    fetchPosts();
-    fetchRecentPosts();
-    fetchCategories();
-    fetchTags();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -31,59 +27,35 @@ export default function Home() {
     loadMore();
   }, [page]);
 
-  const getTotal = async () => {
+  const fetchData = async () => {
     try {
-      const { data } = await axios.get('/post-count');
-      setTotal(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+      const [postCount, posts, categoriesData, tagsData] = await Promise.all([
+        axios.get(`${process.env.NEXT_PUBLIC_API}/post-count`),
+        axios.get(`${process.env.NEXT_PUBLIC_API}/posts/1`),
+        axios.get(`${process.env.NEXT_PUBLIC_API}/categories`),
+        axios.get(`${process.env.NEXT_PUBLIC_API}/tags`),
+      ]);
 
-  const fetchPosts = async () => {
-    try {
-      const { data } = await axios.get('/posts/1');
-      setAllPosts(data);
+      setTotal(postCount.data);
+      setAllPosts(posts.data);
+      setRecentPosts(posts.data);
+      setCategories(categoriesData.data);
+      setTags(tagsData.data);
     } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const fetchRecentPosts = async () => {
-    try {
-      const { data } = await axios.get('/recent-posts');
-      setRecentPosts(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const fetchCategories = async () => {
-    try {
-      const { data } = await axios.get('/categories');
-      setCategories(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const fetchTags = async () => {
-    try {
-      const { data } = await axios.get('/tags');
-      setTags(data);
-    } catch (err) {
-      console.log(err);
+      console.log('Error fetching data:', err);
     }
   };
 
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/posts/${page}`);
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/posts/${page}`
+      );
       setAllPosts([...allPosts, ...data]);
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log('Error loading more posts:', err);
       setLoading(false);
     }
   };
@@ -91,7 +63,7 @@ export default function Home() {
   return (
     <div
       className={`min-h-screen pl-20 ${
-        theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'
+        theme === 'dark' ? 'bg-gray-950 text-white' : 'bg-white text-black'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -102,24 +74,20 @@ export default function Home() {
               {allPosts.map((post, i) => (
                 <div
                   key={i}
-                  className="post-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
+                  className="post-card bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden"
                 >
-                  <Link href={`/${post.slug}`} legacyBehavior>
-                    <a>
-                      <img
-                        src={post.featuredImage?.url || '/images/default.jpeg'}
-                        alt={post.title}
-                        className="w-full h-48 object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
-                      />
-                    </a>
+                  <Link href={`/${post.slug}`}>
+                    <img
+                      src={post.featuredImage?.url || '/images/default.jpeg'}
+                      alt={post.title}
+                      className="w-full h-48 object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
+                    />
                   </Link>
                   <div className="p-4">
-                    <Link href={`/${post.slug}`} legacyBehavior>
-                      <a>
-                        <h2 className="text-xl font-bold mb-2 hover:text-blue-500">
-                          {post.title}
-                        </h2>
-                      </a>
+                    <Link href={`/${post.slug}`}>
+                      <h2 className="text-xl font-bold mb-2 hover:text-blue-500">
+                        {post.title}
+                      </h2>
                     </Link>
                     <p className="text-gray-400 mb-2 flex items-center">
                       <CalendarIcon className="w-5 h-5 mr-2" />
@@ -132,10 +100,11 @@ export default function Home() {
                     >
                       {parse(post.content.substring(0, 100))}...
                     </div>
-                    <Link href={`/${post.slug}`} legacyBehavior>
-                      <a className="mt-4 text-blue-400 hover:text-blue-600">
-                        Read More...
-                      </a>
+                    <Link
+                      href={`/${post.slug}`}
+                      className="mt-4 text-blue-400 hover:text-blue-600"
+                    >
+                      Read More...
                     </Link>
                   </div>
                 </div>
@@ -171,4 +140,7 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;
+
