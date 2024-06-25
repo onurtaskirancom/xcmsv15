@@ -1,10 +1,12 @@
+import AboutContent from '../components/AboutContent';
+
 export const metadata = {
-  title: ' About Onur Taskiran Blog',
-  description: 'About Onur taskiran a WEb Developer Personal Home Page',
+  title: 'About Onur Taskiran Blog',
+  description: 'About Onur Taskiran a Web Developer Personal Home Page',
 };
 
-
-const page = () => {
-  return <div>About</div>;
+const About = () => {
+  return <AboutContent />;
 };
-export default page;
+
+export default About;

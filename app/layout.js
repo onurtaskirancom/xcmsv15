@@ -64,8 +64,8 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-        <Toaster />
         <ThemeProvider>
+        <Toaster />
           <AuthProvider>
             <PostProvider>
               <MediaProvider>

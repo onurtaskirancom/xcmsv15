@@ -11,6 +11,7 @@ import { AiOutlineTag, AiOutlineCalendar, AiOutlineUser } from 'react-icons/ai';
 import { ThreeDots } from 'react-loader-spinner';
 import { AuthContext } from '../context/auth';
 import ThemeContext from '../context/theme';
+import ScrollButton from '../components/ScrollButton';
 
 export default function PostDetail() {
   const router = useRouter();
@@ -223,6 +224,7 @@ export default function PostDetail() {
           )}
         </div>
       </div>
+      <ScrollButton />
     </div>
   );
 }

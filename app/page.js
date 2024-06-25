@@ -7,6 +7,7 @@ import { CalendarIcon } from '@heroicons/react/outline';
 import parse from 'html-react-parser';
 import ThemeContext from './context/theme';
 import Sidebar from './components/Sidebar';
+import ScrollButton from './components/ScrollButton';
 
 const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -85,7 +86,7 @@ const Home = () => {
                   </Link>
                   <div className="p-4">
                     <Link href={`/${post.slug}`}>
-                      <h2 className="text-xl font-bold mb-2 hover:text-blue-500">
+                      <h2 className="text-xl font-bold mb-2 hover:text-blue-200">
                         {post.title}
                       </h2>
                     </Link>
@@ -102,7 +103,7 @@ const Home = () => {
                     </div>
                     <Link
                       href={`/${post.slug}`}
-                      className="mt-4 text-blue-400 hover:text-blue-600"
+                      className="mt-4 text-blue-400 hover:text-blue-200"
                     >
                       Read More...
                     </Link>
@@ -138,9 +139,11 @@ const Home = () => {
           />
         </div>
       </div>
+      <ScrollButton/>
     </div>
   );
 };
 
 export default Home;
+
 

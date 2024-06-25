@@ -101,7 +101,7 @@ function Comments() {
               </p>
             </div>
             <div className="space-x-2">
-              <Link href={`/post/${item?.postId?.slug}#${item._id}`}>view</Link>
+              <Link href={`/${item?.postId?.slug}#${item._id}`}>view</Link>
               <button
                 onClick={() => handleDelete(item)}
                 className="text-red-600"

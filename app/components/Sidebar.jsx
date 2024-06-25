@@ -132,6 +132,10 @@ import {
   AiOutlineGithub,
 } from 'react-icons/ai';
 import { FaTag, FaFolder } from 'react-icons/fa';
+import { IoBookmarkSharp } from 'react-icons/io5';
+import { SiStackedit } from 'react-icons/si';
+import { SlCreditCard } from 'react-icons/sl';
+import { TbCreditCardFilled } from 'react-icons/tb';
 
 const Sidebar = ({ recentPosts, categories, tags }) => {
   const { theme } = useContext(ThemeContext);
@@ -146,7 +150,7 @@ const Sidebar = ({ recentPosts, categories, tags }) => {
         <img
           src="/images/onurtaskiran.jpg"
           alt="Profile"
-          className="w-24 h-24 rounded-full mx-auto mb-4"
+          className="w-32 h-32 rounded-lg mx-auto mb-4"
         />
         <h2 className="text-xl font-bold mb-2">About</h2>
         <p>
@@ -185,7 +189,7 @@ const Sidebar = ({ recentPosts, categories, tags }) => {
       </div>
       <div className="mb-8">
         <h2 className="text-xl font-bold mb-2 flex items-center">
-          <FaFolder className="mr-2" />
+          <SiStackedit className="mr-2" />
           Categories
         </h2>
         <div className="flex flex-wrap">
@@ -195,7 +199,7 @@ const Sidebar = ({ recentPosts, categories, tags }) => {
               key={index}
               className="bg-blue-100 text-blue-700 py-1 px-3 rounded-full m-1 text-xs flex items-center"
             >
-              <FaFolder className="mr-1" />
+              <TbCreditCardFilled className="mr-1" />
               {category.name}
             </Link>
           ))}
@@ -221,7 +225,7 @@ const Sidebar = ({ recentPosts, categories, tags }) => {
       </div>
       <div className="mb-8">
         <h2 className="text-xl font-bold mb-2 flex items-center">
-          <FaTag className="mr-2" />
+          <SlCreditCard className="mr-2" />
           Recent Posts
         </h2>
         <ul>
@@ -232,9 +236,9 @@ const Sidebar = ({ recentPosts, categories, tags }) => {
               <li key={index} className="mb-2">
                 <Link
                   href={`/${post.slug}`}
-                  className="text-blue-500 hover:underline text-sm flex items-center"
+                  className="text-blue-300 hover:underline text-lg flex items-center"
                 >
-                  <FaTag className="mr-1" />
+                  <IoBookmarkSharp className="mr-1" />
                   {post.title}
                 </Link>
               </li>

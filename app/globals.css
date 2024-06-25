@@ -25,6 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+a {
+  color: #7aafdf; 
+}
+
+a:hover {
+  color: #e90489; 
+}
 #toolbar {
   color: #fff;
  background-color: #bababa; 
@@ -40,4 +47,5 @@ body {
 .ql-toolbar.ql-snow {
   @apply bg-blue-300;
 }
+
 
